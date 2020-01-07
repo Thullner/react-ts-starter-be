@@ -16,3 +16,5 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+Route::apiResource('books', 'BookController');

@@ -25,7 +25,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         $user = auth()->user();
@@ -38,7 +38,7 @@ class AuthController extends Controller
         $credentials['email'] = $userRequest['email'];
         $credentials['password'] = $userRequest['password'];
 
-        User::create(['email' => $credentials['email'], 'password' => bcrypt($credentials['password'])]);
+        User::create(['name' => $userRequest['name'], 'email' => $credentials['email'], 'password' => bcrypt($credentials['password'])]);
 
         return $this->login();
     }
@@ -84,3 +84,4 @@ class AuthController extends Controller
         ];
     }
 }
+
